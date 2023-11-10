@@ -1,0 +1,41 @@
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-gap: 5px;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr repeat(10, 1fr);
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr repeat(10, 1fr);
+  border: 1px solid #ccc;
+}
+
+.cell {
+  border: 1px solid #ccc;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.present {
+  background-color: #b4e8b7;
+}
+
+.absent {
+  background-color: #f18c8e;
+}
+.null {
+  background-color: white;
+}
+
