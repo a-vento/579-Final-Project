@@ -1,23 +1,19 @@
 import React from 'react';
-
 function LectureData({ lectureIndex }) {
     const lectureMap = new Map();
-    lectureMap.set(1, "THIS IS LECTURE 1 MATERIAL");
-    lectureMap.set(2, "THIS IS LECTURE 2 MATERIAL");
-    lectureMap.set(3, "THIS IS LECTURE 3 MATERIAL");
-    lectureMap.set(4, "THIS IS LECTURE 4 MATERIAL");
-    lectureMap.set(5, "THIS IS LECTURE 5 MATERIAL");
-    lectureMap.set(6, "THIS IS LECTURE 6 MATERIAL");
-    lectureMap.set(7, "THIS IS LECTURE 7 MATERIAL");
-    lectureMap.set(8, "THIS IS LECTURE 8 MATERIAL");
-    lectureMap.set(9, "THIS IS LECTURE 9 MATERIAL");
-    lectureMap.set(10, "THIS IS LECTURE 10 MATERIAL");
+    lectureMap.set(1,  "\nCovered in class: \n Basic Vanilla JS \n\n Assigned for homework: \n Module 1 on Canvas");
+    lectureMap.set(2, "\nCovered in class: \n Basic Vanilla JS \n\n Assigned for homework: \n Module 2 on Canvas");
+    lectureMap.set(3, "\nCovered in class: \n Basic Vanilla JS \n\n Assigned for homework: \n Module 3 on Canvas");
+    lectureMap.set(4, "\nCovered in class: \n Basic Vanilla JS \n\n Assigned for homework: \n Module 4 on Canvas");
+    lectureMap.set(5, "\nCovered in class: \n Basic Vanilla JS \n\n Assigned for homework: \n Module 5 on Canvas");
+    lectureMap.set(6, "\nCovered in class: \n Basic Vanilla JS \n\n Assigned for homework: \n Module 6 on Canvas");
+    lectureMap.set(7, "\nCovered in class: \n Basic Vanilla JS \n\n Assigned for homework: \n Module 7 on Canvas");
+    lectureMap.set(8, "\nCovered in class: \n Basic Vanilla JS \n\n Assigned for homework: \n Module 8 on Canvas");
+    lectureMap.set(9, "\nCovered in class: \n Basic Vanilla JS \n\n Assigned for homework: \n Module 9 on Canvas");
+    lectureMap.set(10, "\nCovered in class: \n Basic Vanilla JS \n\n Assigned for homework: \n Module 10 on Canvas");
 
-    console.log(lectureIndex + 1)
     return (
-    <div>
-        <h2>{lectureIndex + 1}: {lectureMap.get(lectureIndex+1)}</h2>
-    </div>
+        <span style={{ whiteSpace: 'pre-line' }}>{`Lecture ${lectureIndex + 1} \n ${lectureMap.get(lectureIndex+1)}`}</span>
     );
 }
 
