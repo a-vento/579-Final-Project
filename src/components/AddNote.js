@@ -4,10 +4,9 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
 const AddNote = ({students, setNote}) => {
-    const [selectedStudent, setSelectedStudent] = useState('');
+    const [selectedStudent, setSelectedStudent] = useState(null);
     const [noteDescription, setNoteDescription] = useState('');
     const [dueDate, setDueDate] = useState('');
-    const [dueTime, setDueTime] = useState('');
     const studentNames = []
     {students['students'].map((student) => (
         studentNames.push(student)
@@ -27,8 +26,7 @@ const AddNote = ({students, setNote}) => {
         });
         setNoteDescription('');
         setDueDate('');
-        setDueTime('');
-        setSelectedStudent('');
+        setSelectedStudent(null);
       }
     }
     const isSubmitDisabled = !noteDescription;
@@ -36,6 +34,8 @@ const AddNote = ({students, setNote}) => {
       <section>
         <div className='input-group p-4'>
           <Autocomplete
+            isOptionEqualToValue={(option, value) => option.valueOf === value.valueOf}
+            value={selectedStudent}
             onChange={(event, newValue) => setSelectedStudent(newValue)}
             getOptionLabel={(option) => option.name}
             options={studentNames}
@@ -43,14 +43,14 @@ const AddNote = ({students, setNote}) => {
             renderInput={(params) => <TextField {...params} label="Student" />}
           /> 
           <input className="form-control w-25" type="text" 
-                placeholder="Note Description" 
-                onChange={(e) => setNoteDescription(e.target.value)} 
-                value = {noteDescription} 
+            placeholder="Note Description" 
+            onChange={(e) => setNoteDescription(e.target.value)} 
+            value = {noteDescription} 
           />
           <input className="form-control" type="date"
-                  placeholder="mm/dd/yyyy" 
-                  onChange={(e) => setDueDate(e.target.value)} 
-                  value={dueDate} >
+            placeholder="mm/dd/yyyy" 
+            onChange={(e) => setDueDate(e.target.value)} 
+            value={dueDate} >
           </input>
           <br/>
           <button className='btn btn-primary' type='submit' onClick={addStudentNote} disabled={isSubmitDisabled}>

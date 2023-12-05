@@ -38,14 +38,6 @@
 .null {
   background-color: white;
 }
-
-.studentChart {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.done {
-  margin-top: 10px;
+.excused {
+  background-color: orange;
 }

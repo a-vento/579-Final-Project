@@ -20,7 +20,7 @@ function StudentNotes (students) {
     return (
       <main className='container'>
         <AddNote students={students} setNote={setNote}/>
-        <ul className='row'>
+        <ul className='notes-row'>
           {note.map((todo, index) => (
             <NoteItem key={index} name={todo.name} note={todo.note} date = {todo.date} created={todo.created} time={todo.time} remove={remove} />
           ))}

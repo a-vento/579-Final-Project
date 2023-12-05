@@ -75,10 +75,11 @@ function AttendanceGraph() {
   const [student, setStudent] = useState(null);
 
   // toggle between three values
-  const threewayToggle = (value) => {
+  const fourwayToggle = (value) => {
     if (value === null) return true;
-    if (value === false) return null;
-    return false;
+    if (value === true) return false;
+    if (value === false) return 'excused';
+    return null; 
   };
 
   // toggle attendance
@@ -89,7 +90,7 @@ function AttendanceGraph() {
           ? {
               ...student,
               attendance: student.attendance.map((value, index) =>
-                index === lectureNumber ? threewayToggle(value) : value
+                index === lectureNumber ? fourwayToggle(value) : value
               ),
             }
           : student
@@ -143,12 +144,20 @@ function AttendanceGraph() {
                 onClick={() => clickStudent(student)}>
                 {student.name}
               </button>
-              {student.attendance.map((isPresent, index) => (
+              {student.attendance.map((attendanceStatus, index) => (
                 <div
-                  key={index}
-                  className={`cell ${isPresent ? 'present' : isPresent === false ? 'absent' : 'excused'}`}
-                  onClick={() => toggleAttendance(student.key, index)}
-                />
+                key={index}
+                className={`cell ${attendanceStatus === true ? 'present' : attendanceStatus === false ? 'absent' : attendanceStatus === 'excused' ? 'excused' : 'null'}`}
+                onClick={() => toggleAttendance(student.key, index)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    toggleAttendance(student.key, index);
+                  }
+                }}
+                role="button"
+                tabIndex="0" 
+              />
               ))}
             </div>
           ))}
@@ -174,17 +183,18 @@ function AttendanceGraph() {
       <CustomTabPanel key={1} value={value} index={1}>
         <div className="student-chart">
           <div className="focused-student">
-            {student !== null && (
-              <div className="student-details">
-                <Button variant="outline-danger" onClick={closeStudent} >Close Student Details</Button>
-              </div>
-            )}
+            <div> Focused Student:</div>
             {student !== null && student !== undefined && 
               <StudentChart 
                 attendance={student.attendance} 
                 name={student.name} 
               />
             }
+            {student !== null && (
+              <div className="student-details">
+                <Button variant="outline-danger" onClick={closeStudent} >Close Student Details</Button>
+              </div>
+            )}
           </div>
           <div className='studentChart'>
             {students.map((s, index) => 
@@ -219,8 +229,7 @@ function AttendanceGraph() {
         <StudentNotes 
           students = {students}/>
       </CustomTabPanel>
-    </Box>
-
+      </Box>
     </>
   );
 }

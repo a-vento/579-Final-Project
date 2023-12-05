@@ -1,21 +1,21 @@
-// import AttendanceBarChart from './BarChart';
-// import PieChart from "./PieChart"
 import { Chart } from "react-google-charts";
 import './../../src/App.css';
 
-function AttendanceChart(students) {
+function AttendanceChart(studentsArray) {
     const attendanceDict = {}
     const absentDict = {}
+    const excusedDict = {}
     let studentList = JSON.parse(localStorage.getItem('attendanceData'))
 
-    if(students['students']) {
-        studentList = students['students']
+    if(studentsArray['students']) {
+        studentList = studentsArray['students']
     }
 
     studentList.forEach((student) => {
         if (!(student['name'] in attendanceDict)) {
             attendanceDict[student['name']] = 0;
             absentDict[student['name']] = 0;
+            excusedDict[student['name']] = 0;
         }
 
         student['attendance'].forEach((attendance) => {
@@ -23,6 +23,8 @@ function AttendanceChart(students) {
                 attendanceDict[student['name']] += 1;
             } else if (attendance === false) {
                 absentDict[student['name']] += 1;
+            } else if (attendance != null) {
+                excusedDict[student['name']] += 1;
             }
         });
     });
@@ -33,14 +35,18 @@ function AttendanceChart(students) {
     const totalAbsent = absentDict.Student1 + absentDict.Student2 
                     + absentDict.Student3 + absentDict.Student4 + absentDict.Student5; 
     
+    const totalExcused = excusedDict.Student1 + excusedDict.Student2 
+                    + excusedDict.Student3 + excusedDict.Student4 + excusedDict.Student5; 
+    
     const data = [
         ["Category", "Value"],
         ["Absent", totalAbsent],
         ["Present", totalPresent],
+        ["Excused", totalExcused],
     ];
 
-    var options = {
-        colors: ['red', '#013220'],
+    let options = {
+        colors: ['#D3212C', '#069C56', '#FF980E'],
     };
     
     return(
